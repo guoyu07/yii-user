@@ -5,7 +5,11 @@ class DefaultController extends CController
 
     public function actionIndex()
     {
-        $this->redirect(array('login'));
+        if(Yii::app()->user->isGuest) {
+            $this->redirect(array('login'));
+        } else {
+            $this->redirect(array('status'));
+        }
     }
     
     /**
@@ -35,6 +39,11 @@ class DefaultController extends CController
         }
         Yii::app()->user->logout(false);
         $this->redirect(Yii::app()->homeUrl);
-    }    
-    
+    }
+
+    public function actionStatus()
+    {
+        $this->render('status');
+    }
+
 }
