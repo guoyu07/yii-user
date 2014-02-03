@@ -16,6 +16,9 @@ class DefaultController extends CController
      * Login Action
      */
     public function actionLogin() {
+        if(!Yii::app()->user->isGuest) {
+            $this->redirect(array('status'));
+        }        
         $model = new LoginForm();
         $form = new CForm('user.views.default.loginForm', $model);
 
